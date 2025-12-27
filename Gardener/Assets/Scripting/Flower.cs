@@ -2,20 +2,16 @@ using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public GameObject colorFlower;
+    public GameObject noColorFlower;
+    public Animator Animator;
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void Recover()
     {
-        Debug.Log("flower watered");
         //recover flower
+        noColorFlower.SetActive(false);
+        colorFlower.SetActive(true);
+        Animator.SetBool("Recover", true);
     }
 }

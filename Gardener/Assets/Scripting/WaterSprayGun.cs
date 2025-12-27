@@ -4,11 +4,10 @@ public class WaterSprayGun : Tools
 {
     protected override void Interact(Collider collider)
     {
-        Flower flower;
-        if (collider.TryGetComponent(out flower))
+        Flower Flower;
+        if (collider.TryGetComponent(out Flower))
         {
-            Debug.Log("yesssss");
-            flower.Recover();
+            Flower.Recover();
         }
     }
 }

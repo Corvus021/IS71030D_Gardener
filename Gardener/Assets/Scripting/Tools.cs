@@ -10,11 +10,13 @@ public abstract class Tools : MonoBehaviour
 
     private void Start()
     {
+        //exclude layer "Tools" to prevent them from blocking ray
         toolsMask = ~LayerMask.GetMask("Tools");
     }
     public virtual void useTool()
     {
         //ray from main camera to mouse click position
+        //get ray's origin and direction
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         //information on what the rays hit
         RaycastHit hit;
