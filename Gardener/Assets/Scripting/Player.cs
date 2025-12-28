@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    public Tools Tool;
+    public float rayDistance = 1f;
+    public LayerMask Mask;
+    public Tools currentTool;
+    private int curtoolNumber = 0;
 
-    List<GameObject> toolsList = new List<GameObject>();
+    public List<Tools> toolsList = new List<Tools>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,9 +18,79 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        SwitchTool();
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Tool.useTool();
+            FindTools();
         }
+        if (Input.GetMouseButtonDown(0)&& currentTool != null)
+        {
+            currentTool.useTool();
+        }
+    }
+    void FindTools()
+    {
+        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(mouseRay, out hit, rayDistance, Mask))
+        {
+            Debug.Log(hit.collider.name);
+            PickupTool pickedTool = hit.collider.GetComponent<PickupTool>();
+            if (pickedTool != null)
+            {
+                //this player pickup tool
+                pickedTool.PickUp(this);
+            }
+        }
+    }
+    public void TakeTool(Tools Tool)
+    {
+        //Contains:is this tool in the list?
+        //no this tool, add it to toolsList
+        if(!toolsList.Contains(Tool))
+        {
+            toolsList.Add(Tool);
+        }
+        //now which tool we take
+        SelectionTool(Tool);
+    }
+    public void SelectionTool(Tools Tool)
+    {
+        for (int i = 0; i < toolsList.Count; i++)
+        {
+            toolsList[i].gameObject.SetActive(toolsList[i] == Tool);
+            if (toolsList[i] == Tool)
+            {
+                curtoolNumber = i;
+            }
+        }
+        currentTool = Tool;
+        Debug.Log("Tool:" + Tool.name);
+    }
+    void SwitchTool()
+    {
+        //Count:how many things in this list
+        if(toolsList.Count == 0)
+        {
+            return;
+        }
+        float rolling = Input.GetAxis("Mouse ScrollWheel");
+
+        if(rolling > 0f)
+        {
+            curtoolNumber++;
+        }
+        else if(rolling < 0f)
+        {
+            curtoolNumber--;
+        }
+        //"%"getting the remainder after dividing two numbers(a%b=a-(a/b)*b)
+        curtoolNumber = (curtoolNumber + toolsList.Count) % toolsList.Count;
+        for (int i = 0; i < toolsList.Count; i++)
+        {
+            //SetActive(true) when i=curtoolNumber(which one you take now), otherwise SetActive(flase)
+            toolsList[i].gameObject.SetActive(i == curtoolNumber);
+        }
+        currentTool = toolsList[curtoolNumber];
     }
 }
