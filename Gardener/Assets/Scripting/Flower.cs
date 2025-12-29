@@ -6,7 +6,6 @@ public class Flower : MonoBehaviour
     public GameObject noColorFlower;
     public Animator Animator;
     
-
     public void Recover()
     {
         //recover flower
