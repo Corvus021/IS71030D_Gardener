@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class Trumpet : MonoBehaviour
+public class Trumpet : Tools
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Interact(Collider collider)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Ghosts Ghosts;
+        if (collider.TryGetComponent(out Ghosts))
+        {
+            Ghosts.Appeared();
+        }
     }
 }
