@@ -2352,7 +2352,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7058241092330782167}
   - component: {fileID: 4311445358908112668}
-  - component: {fileID: 68465298700629855}
   - component: {fileID: 116083247379134377}
   m_Layer: 10
   m_Name: Hammer
@@ -2399,33 +2398,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5759071, y: 1.4613187, z: 2.3316665}
   m_Center: {x: 0.2879558, y: 0.32807493, z: -0.056593757}
---- !u!54 &68465298700629855
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7933163581838177750}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &116083247379134377
 MonoBehaviour:
   m_ObjectHideFlags: 0

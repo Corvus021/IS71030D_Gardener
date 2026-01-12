@@ -5,6 +5,8 @@ public class Flower : MonoBehaviour
     public GameObject colorFlower;
     public GameObject noColorFlower;
     public Animator Animator;
+    public AudioSource audioSource;
+    public AudioClip bubbleClip;
     public bool isWatered = false;
     
     public void Recover()
@@ -14,5 +16,7 @@ public class Flower : MonoBehaviour
         colorFlower.SetActive(true);
         Animator.SetBool("Recover", true);
         isWatered = true;
+        audioSource.clip = bubbleClip;
+        audioSource.Play();
     }
 }

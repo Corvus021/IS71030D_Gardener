@@ -6,6 +6,8 @@ using System.Collections;
 public class Ghost : MonoBehaviour
 {
     public Animator Animator;
+    public AudioSource audioSource;
+    public AudioClip ghostClip;
     public Transform Player;
     public Transform[] movePoint;
     public GameObject theGhost;
@@ -37,6 +39,7 @@ public class Ghost : MonoBehaviour
         //ghost appear
         theGhost.SetActive(true);
         ghostText.gameObject.SetActive(true);
+        StartTalk();
         string ghostSay = "";
         switch(taskStep)
         {
@@ -49,6 +52,7 @@ public class Ghost : MonoBehaviour
                 yield return new WaitForSeconds(textWait);
                 ghostSay = "...I know where the problem is.";
                 ghostText.text = ghostSay;
+                yield return new WaitForSeconds(textWait);
                 break;
             case 1:
                 ghostSay = "I'm...so sorry for that.";
@@ -123,6 +127,7 @@ public class Ghost : MonoBehaviour
         //wait for talk done
         yield return new WaitForSeconds(textWait);
         ghostText.gameObject.SetActive(false);
+        StopTalk();
         if (taskStep<6)
         {
             theGhost.transform.position = movePoint[taskStep].position;
@@ -130,5 +135,20 @@ public class Ghost : MonoBehaviour
         taskStep++;
         canTalk = true;
         yield return null;
+    }
+    void StartTalk()
+    {
+        if(!audioSource.isPlaying)
+        {
+            audioSource.clip = ghostClip;
+            audioSource.Play();
+        }
+    }
+    void StopTalk()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 }

@@ -6,6 +6,8 @@ public abstract class Tools : MonoBehaviour
     public float Range = 2f;
     public float rayDistance = 1f;
     public Animator Animator;
+    public AudioSource audioSource;
+    public AudioClip toolClip;
     public LayerMask Mask;
     public LayerMask toolsMask;
     private Collider[] colliders = new Collider[8];
@@ -30,6 +32,7 @@ public abstract class Tools : MonoBehaviour
         {
             Animator.Play("Cut", -1, 0f );
         }
+        audioSource.PlayOneShot(toolClip);
         if (Physics.Raycast(mouseRay, out hit, rayDistance, toolsMask))
         {
             Debug.Log(hit.collider.name);
