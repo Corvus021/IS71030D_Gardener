@@ -843,6 +843,7 @@ MonoBehaviour:
   Intact: {fileID: 8108769900325273211}
   Broken: {fileID: 1912342775447773509}
   itemType: 0
+  isBroken: 0
 --- !u!1 &4393698153413525506
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Ghost : MonoBehaviour
 {
+    public Animator Animator;
     public Transform Player;
     public Transform[] movePoint;
     public GameObject theGhost;
@@ -11,6 +13,7 @@ public class Ghost : MonoBehaviour
     public float textWait;
     public int taskStep = 0;
     public bool canTalk = true;
+    public Note Note;
    
     void Update()
     {
@@ -24,6 +27,7 @@ public class Ghost : MonoBehaviour
         }
         if(other.CompareTag("Player"))
         {
+            //ghost event
             StartCoroutine(GhostWork());
         }
     }
@@ -70,6 +74,7 @@ public class Ghost : MonoBehaviour
                 ghostText.text = ghostSay;
                 break;
             case 3:
+                Animator.Play("FlyHammer");
                 ghostSay = "Oh my god! Are you okay? I just wanted to give you that thing, not let it broken your head.";
                 ghostText.text = ghostSay;
                 yield return new WaitForSeconds(textWait);
@@ -97,6 +102,11 @@ public class Ghost : MonoBehaviour
                 ghostText.text = ghostSay;
                 break;
             case 6:
+                //wait for isEnd
+                while(!Note.isEnd)
+                {
+                    yield return null;
+                }
                 ghostSay = "You¡¯ve finished your work! This garden finally looks like a real one!";
                 ghostText.text = ghostSay;
                 yield return new WaitForSeconds(textWait);
@@ -105,8 +115,12 @@ public class Ghost : MonoBehaviour
                 yield return new WaitForSeconds(textWait);
                 ghostSay = "...Maybe you¡¯re a pretty cool person? Goodbye, gardener¡ª¡ªI¡¯ll miss you.";
                 ghostText.text = ghostSay;
+                yield return new WaitForSeconds(textWait);
+                //End Game
+                SceneManager.LoadScene("MainMenu");
                 break;
         }
+        //wait for talk done
         yield return new WaitForSeconds(textWait);
         ghostText.gameObject.SetActive(false);
         if (taskStep<6)

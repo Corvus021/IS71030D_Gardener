@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public float rayDistance = 1f;
     public LayerMask Mask;
     public Tools currentTool;
+    public Animator Animator;
     private int curtoolNumber = 0;
 
     public List<Tools> toolsList = new List<Tools>();
@@ -26,6 +27,16 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0)&& currentTool != null)
         {
             currentTool.useTool();
+        }
+        //if player move
+        bool isMove=Mathf.Abs(Input.GetAxis("Horizontal"))>0.1f|| Mathf.Abs(Input.GetAxis("Vertical"))>0.1f;
+        if(isMove)
+        {
+            Animator.SetBool("isMove", true);
+        }
+        else
+        {
+            Animator.SetBool("isMove", false);
         }
     }
     void FindTools()

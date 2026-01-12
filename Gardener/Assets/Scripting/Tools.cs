@@ -2,8 +2,10 @@ using UnityEngine;
 
 public abstract class Tools : MonoBehaviour
 {
+    public int animType = 0;
     public float Range = 2f;
     public float rayDistance = 1f;
+    public Animator Animator;
     public LayerMask Mask;
     public LayerMask toolsMask;
     private Collider[] colliders = new Collider[8];
@@ -20,7 +22,14 @@ public abstract class Tools : MonoBehaviour
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         //information on what the rays hit
         RaycastHit hit;
-
+        if(animType==0)
+        {
+            Animator.Play("Hit", -1, 0f );
+        }
+        else
+        {
+            Animator.Play("Cut", -1, 0f );
+        }
         if (Physics.Raycast(mouseRay, out hit, rayDistance, toolsMask))
         {
             Debug.Log(hit.collider.name);

@@ -11,6 +11,7 @@ public class CanBreak : MonoBehaviour
     public GameObject Intact;
     public GameObject Broken;
     public ItemType itemType;
+    public bool isBroken = false;
 
     public void Break()
     {
@@ -20,6 +21,7 @@ public class CanBreak : MonoBehaviour
         if(itemType == ItemType.canBroken && Broken != null)
         {
             Broken.SetActive(true);
+            isBroken = true;
         }
     }
 

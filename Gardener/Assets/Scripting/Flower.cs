@@ -5,6 +5,7 @@ public class Flower : MonoBehaviour
     public GameObject colorFlower;
     public GameObject noColorFlower;
     public Animator Animator;
+    public bool isWatered = false;
     
     public void Recover()
     {
@@ -12,5 +13,6 @@ public class Flower : MonoBehaviour
         noColorFlower.SetActive(false);
         colorFlower.SetActive(true);
         Animator.SetBool("Recover", true);
+        isWatered = true;
     }
 }
